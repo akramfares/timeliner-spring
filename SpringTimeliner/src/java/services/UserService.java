@@ -11,7 +11,7 @@ import DAO.UserDAO;
  *
  * @author afares01
  */
-public interface AnnuaireService {
+public interface UserService {
 	
 
 	public boolean inscription(String nom, String prenom, String sexe, String adresse, String login, String motdepasse);
