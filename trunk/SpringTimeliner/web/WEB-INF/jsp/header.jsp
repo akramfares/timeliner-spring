@@ -8,12 +8,16 @@
 		<title></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="/SpringTimeliner/css/style.css" rel=stylesheet type="text/css">
+                <link href="/SpringTimeliner/css/templates.css" rel=stylesheet type="text/css">
 	</head>
 	<body>
-		<div id="conteneur">
-                    <div id="header">
-				
-                                <c:choose>
+                    
+                    <!-- Header and Nav -->
+
+                    <div class="row">
+                      <div class="twelve columns">
+                        <div class="panel header">
+                           <c:choose>
                                     <c:when test="${connecte}">
                                         <ul class="nav cf">
                                             <li><a href="/SpringTimeliner">Accueil</a></li>
@@ -31,6 +35,15 @@
                                           </ul>
                                     </c:otherwise>
                               </c:choose>
-				
-                                 
-			</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- End Header and Nav -->
+
+
+                    <div class="row">
+
+                      <!-- Main Feed -->
+                      <!-- This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
+                      <div class="six columns push-three">

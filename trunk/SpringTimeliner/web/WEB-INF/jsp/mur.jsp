@@ -3,20 +3,25 @@
 			<div id="contenu">
 			<form method='post' action='/SpringTimeliner/${action}.htm' name='formulaire'>
 				
-                                    <p>Contenu : <textarea name='contenu'></textarea></p>
+                                    <p>Quoi de neuf ? <textarea name='contenu'></textarea></p>
                                 <input type='submit' value='Envoyer'/>
                         </form>	
                         
-                        <table>
-                            <th>Contenu</th>
                             <c:forEach items="${list_status}" var="current">
-                              <tr>
-                                  <td>${current.contenu}</td>
-                              </tr>
+                               <!-- Feed Entry -->
+                                <div class="row">
+                                  <div class="two columns mobile-one"><img src="http://placehold.it/80x80&text=[img]" /></div>
+                                  <div class="ten columns">
+                                    <p><strong>Some Person said:</strong> ${current.contenu}</p>
+                                    <ul class="inline-list">
+                                      <li><a href="">Reply</a></li>
+                                      <li><a href="">Share</a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                                <!-- End Feed Entry -->
+
+                                <hr />
                             </c:forEach>                          
-                        </table>
 			</div>
-		</div>
-		
-	</body>
-</html>
+<jsp:include page="footer.jsp" />
