@@ -9,7 +9,5 @@
 			<input type='submit' value='Envoyer'/>
 		</form>	
 			</div>
-		</div>
-		
-	</body>
-</html>
+                        
+<jsp:include page="footer.jsp" />

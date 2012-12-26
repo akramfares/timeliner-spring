@@ -3,7 +3,4 @@
 			<div id="contenu">
 			${resultat}	
 			</div>
-		</div>
-		
-	</body>
-</html>
+<jsp:include page="footer.jsp" />
