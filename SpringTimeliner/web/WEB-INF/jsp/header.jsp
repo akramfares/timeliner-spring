@@ -31,7 +31,8 @@
 
                                     <c:otherwise>
                                         <ul class="nav cf">
-                                            <li><a href="/SpringTimeliner">Accueil</a> | Non connecté</li>
+                                            <li><a href="/SpringTimeliner">Accueil</a></li>
+                                            <li><a href="#"> Vous n'êtes pas connecté</a></li>
                                           </ul>
                                     </c:otherwise>
                               </c:choose>

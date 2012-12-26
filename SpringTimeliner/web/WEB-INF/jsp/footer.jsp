@@ -6,7 +6,7 @@
     <div class="three columns pull-six">
       <div class="panel">
         <a href="#"><img src="http://placehold.it/300x240&text=[img]" /></a>
-        <h5><a href="#">Your Name</a></h5>
+        <h5><a href="#">${userConnecte.nom} ${userConnecte.prenom}</a></h5>
 
         <dl class="vertical tabs">
           <dd><a href="#">Section 1</a></dd>
