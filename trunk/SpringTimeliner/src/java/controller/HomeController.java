@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import services.AnnuaireService;
+import services.UserService;
 
 /**
  *
@@ -23,7 +23,7 @@ import services.AnnuaireService;
 @Controller
 public class HomeController {
 	@Autowired
-	private AnnuaireService annuaire;	
+	private UserService userService;	
 	
 	@RequestMapping(value="/index.htm",method=RequestMethod.GET)
 	protected ModelAndView indexProcess( HttpServletRequest
@@ -45,7 +45,7 @@ public class HomeController {
                 String login = request.getParameter("login");
 		String motdepasse = request.getParameter("motdepasse");
 		mv.addObject("titre","Résultat de l'inscription");
-		if(annuaire.inscription(nom, prenom, sexe, adresse, login, motdepasse))
+		if(userService.inscription(nom, prenom, sexe, adresse, login, motdepasse))
 			mv.addObject("resultat","Inscription réussie");
 		else
 			mv.addObject("resultat", "Erreur d'inscription");
@@ -61,10 +61,10 @@ public class HomeController {
 		String login = request.getParameter("login");
 		String motdepasse = request.getParameter("motdepasse");
 		mv.addObject("titre","Résultat de la connexion");
-		if(annuaire.connexion(login, motdepasse)){
+		if(userService.connexion(login, motdepasse)){
 			
 			HttpSession session=request.getSession(false); // pas de création !
-			User u = annuaire.getUserDAO().findByName(login);
+			User u = userService.getUserDAO().findByName(login);
 			session.setAttribute("user",u);
 			mv.addObject("resultat","Connexion réussie "+u.getLogin());
 		}

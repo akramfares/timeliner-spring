@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
  * @author afares01
  */
 @Service("AnnuaireService")
-public class AnnuaireServiceImpl implements AnnuaireService{
+public class UserServiceImpl implements UserService{
 	@Autowired
 	public UserDAO users;
 	
