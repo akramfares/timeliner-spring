@@ -7,6 +7,7 @@ package services;
 import DAO.User;
 import DAO.UserDAO;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,12 +39,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String getAllUsers() {
-		String resultat = "";	
-		for(User u : users.findAll()){
-			 resultat += "<option value='"+u.getId()+"'>"+u.getLogin()+"</option>";
-		}
-		return resultat;
+	public List<User> getAllUsers() {
+		return users.findAll();
 	}
 
 	@Override

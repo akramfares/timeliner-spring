@@ -6,6 +6,7 @@ package services;
 
 import DAO.User;
 import DAO.UserDAO;
+import java.util.List;
 
 /**
  *
@@ -16,6 +17,6 @@ public interface UserService {
 
 	public boolean inscription(String nom, String prenom, String sexe, String adresse, String login, String motdepasse);
 	public boolean connexion(String login, String motdepasse);
-	public String getAllUsers();
+	public List<User> getAllUsers();
 	public UserDAO getUserDAO();
 }

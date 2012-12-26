@@ -29,7 +29,27 @@ public class HomeController {
 	protected ModelAndView indexProcess( HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
             ModelAndView mv = new ModelAndView("index"); 
-                mv.addObject("connecte",isConnecte(request));
+                return mv;
+        }
+        
+        @RequestMapping(value="/header.htm",method=RequestMethod.GET)
+	protected ModelAndView headerProcess( HttpServletRequest
+	  request, HttpServletResponse response) throws Exception { 
+            HttpSession session=request.getSession(false); 
+	    User userSession = (User) session.getAttribute("user");
+            ModelAndView mv = new ModelAndView("header"); 
+                mv.addObject("connecte",isConnecte(userSession));
+                return mv;
+        }
+        
+        @RequestMapping(value="/footer.htm",method=RequestMethod.GET)
+	protected ModelAndView footerProcess( HttpServletRequest
+	  request, HttpServletResponse response) throws Exception { 
+            HttpSession session=request.getSession(false); 
+	    User userSession = (User) session.getAttribute("user");
+            ModelAndView mv = new ModelAndView("footer"); 
+                mv.addObject("connecte",isConnecte(userSession));
+                mv.addObject("userConnecte",userSession);
                 return mv;
         }
 
@@ -37,7 +57,6 @@ public class HomeController {
 	  protected ModelAndView inscriptionProcess( HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
 		ModelAndView mv = new ModelAndView("resultat"); 
-                mv.addObject("connecte",isConnecte(request));
 		String nom = request.getParameter("nom");
                 String prenom = request.getParameter("prenom");
                 String sexe = request.getParameter("sexe");
@@ -57,7 +76,6 @@ public class HomeController {
 	  protected ModelAndView connexionProcess( HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
 		ModelAndView mv = new ModelAndView("resultat"); 
-                mv.addObject("connecte",isConnecte(request));
 		String login = request.getParameter("login");
 		String motdepasse = request.getParameter("motdepasse");
 		mv.addObject("titre","Résultat de la connexion");
@@ -74,9 +92,7 @@ public class HomeController {
 	  	return mv; 
 	  }	
         
-        private boolean isConnecte(HttpServletRequest request){
-            HttpSession session=request.getSession(false); 
-	    User userSession = (User) session.getAttribute("user");
+        private boolean isConnecte(User userSession){
             if(userSession == null) return false;
             else return true;
         }

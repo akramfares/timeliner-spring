@@ -1,5 +1,5 @@
- <jsp:include page="header.jsp" />
-			
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>		
+ <c:import url="/header.htm"></c:import>
 			<div id="contenu">
 			<form method='post' action='/SpringTimeliner/${action}.htm' name='formulaire'>
 				
@@ -9,5 +9,5 @@
 			<input type='submit' value='Envoyer'/>
 		</form>	
 			</div>
-                        
-<jsp:include page="footer.jsp" />
+                        		
+ <c:import url="/footer.htm"></c:import>
