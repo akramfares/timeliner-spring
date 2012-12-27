@@ -19,4 +19,7 @@ public interface UserService {
 	public boolean connexion(String login, String motdepasse);
 	public List<User> getAllUsers();
 	public UserDAO getUserDAO();
+        public User getUserById(Integer id);
+        public boolean ajouterAmi(User userSession, User ami);
+        
 }

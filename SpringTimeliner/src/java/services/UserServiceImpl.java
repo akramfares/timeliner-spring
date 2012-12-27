@@ -4,6 +4,8 @@
  */
 package services;
 
+import DAO.Ami;
+import DAO.AmiDAO;
 import DAO.User;
 import DAO.UserDAO;
 import java.util.Date;
@@ -19,7 +21,8 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService{
 	@Autowired
 	public UserDAO users;
-	
+	@Autowired
+	public AmiDAO amiDAO;
 
 	@Override
 	public boolean inscription(String nom, String prenom, String sexe, String adresse,String login, String motdepasse) {
@@ -47,9 +50,27 @@ public class UserServiceImpl implements UserService{
 	public UserDAO getUserDAO() {
 		return users;
 	}
+        
+        @Override
+	public User getUserById(Integer id) {
+		return users.findById(id);
+	}
 
     private boolean sexeBoolean(String sexe) {
         if(sexe.equals("m")) return true;
+        else return false;
+    }
+
+    @Override
+    public boolean ajouterAmi(User userSession, User ami) {
+        if(ami != null || userSession != null){
+            Ami a = new Ami();
+            a.setProprio(userSession);
+            a.setDestinataire(ami);
+            a.setEtat(false);
+            amiDAO.addAmi(a);
+            return true;
+        }
         else return false;
     }
 

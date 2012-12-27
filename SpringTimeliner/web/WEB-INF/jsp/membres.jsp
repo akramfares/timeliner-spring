@@ -9,7 +9,7 @@
               <div class="ten columns">
                   <p><strong>${current.nom} ${current.prenom}</strong></p>
                 <ul class="inline-list">
-                  <li><a href="">+ Ajouter à mes amis</a></li>
+                  <li><a href="ajouter_ami.htm?ami_id=${current.id}">+ Ajouter à mes amis</a></li>
                 </ul>
               </div>
             </div>
