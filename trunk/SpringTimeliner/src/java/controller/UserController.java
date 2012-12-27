@@ -33,4 +33,21 @@ public class UserController {
                 return mv;
         }
         
+        @RequestMapping(value="/ajouter_ami.htm", method=RequestMethod.GET)
+	  protected ModelAndView ajouterProcess( HttpServletRequest
+	  request, HttpServletResponse response) throws Exception { 
+		ModelAndView mv = new ModelAndView("resultat"); 
+		String ami_id = request.getParameter("ami_id");
+		HttpSession session=request.getSession(false); 
+		User userSession = (User) session.getAttribute("user");
+		mv.addObject("titre","Résultat de l'ajout d'un ami");
+                User ami = userService.getUserById(Integer.parseInt(ami_id));
+		if(userService.ajouterAmi(userSession, ami))
+			mv.addObject("resultat","Demande d'amitié ajoutée avec succès");
+		else
+			mv.addObject("resultat", "Erreur");
+		
+	  	return mv; 
+	  }
+        
 }

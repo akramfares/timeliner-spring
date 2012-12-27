@@ -34,7 +34,30 @@ public class User implements Serializable {
 	private List<Status> statusEnvoye = new ArrayList<Status>();
         @OneToMany
 	private List<Status> statusRecus = new ArrayList<Status>();
+        
+        @OneToMany
+	private List<Ami> amisEnvoyes = new ArrayList<Ami>();
+        @OneToMany
+	private List<Ami> amisRecus = new ArrayList<Ami>();
 
+    public List<Ami> getAmisEnvoyes() {
+        return amisEnvoyes;
+    }
+
+    public void setAmisEnvoyes(List<Ami> amisEnvoyes) {
+        this.amisEnvoyes = amisEnvoyes;
+    }
+
+    public List<Ami> getAmisRecus() {
+        return amisRecus;
+    }
+
+    public void setAmisRecus(List<Ami> amisRecus) {
+        this.amisRecus = amisRecus;
+    }
+
+        
+        
     public String getNom() {
         return nom;
     }
