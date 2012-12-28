@@ -12,7 +12,7 @@
                                 <div class="row">
                                   <div class="two columns mobile-one"><img src="http://placehold.it/80x80&text=[img]" /></div>
                                   <div class="ten columns">
-                                    <p><strong>Some Person said:</strong> ${current.contenu}</p>
+                                    <p><strong>${current.proprio.nom} ${current.proprio.prenom} said :</strong> ${current.contenu}</p>
                                     <ul class="inline-list">
                                       <li><a href="">Reply</a></li>
                                       <li><a href="">Share</a></li>
