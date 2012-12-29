@@ -74,5 +74,24 @@ public class UserServiceImpl implements UserService{
         else return false;
     }
 
+    @Override
+    public List<User> getDemandesAmi(User userSession) {
+        return amiDAO.getDemandesAmi(userSession);
+    }
+    
+    @Override
+    public List<User> getAmis(User userSession) {
+        return amiDAO.getAmis(userSession);
+    }
+
+    @Override
+    public boolean confirmerAmi(User userSession, User ami) {
+        if(ami != null || userSession != null){
+            amiDAO.confimer(userSession, ami);
+            return true;
+        }
+        else return false;
+    }
+
 	
 }

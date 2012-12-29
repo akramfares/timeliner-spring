@@ -21,5 +21,8 @@ public interface UserService {
 	public UserDAO getUserDAO();
         public User getUserById(Integer id);
         public boolean ajouterAmi(User userSession, User ami);
+        public List<User> getDemandesAmi(User userSession);
+        public List<User> getAmis(User userSession);
+        public boolean confirmerAmi(User userSession, User ami);
         
 }
