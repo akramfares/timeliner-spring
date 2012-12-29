@@ -27,9 +27,14 @@ public class UserController {
 	@RequestMapping(value="/membres.htm",method=RequestMethod.GET)
 	protected ModelAndView indexProcess( HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
+            HttpSession session=request.getSession(false); 
+            User userSession = (User) session.getAttribute("user");
+                
             ModelAndView mv = new ModelAndView("membres"); 
                 
-                mv.addObject("users",userService.getAllUsers());
+            mv.addObject("amis",userService.getAmis(userSession));
+            mv.addObject("demandes_ami",userService.getDemandesAmi(userSession));
+            mv.addObject("users",userService.getAllUsers());
                 return mv;
         }
         
@@ -44,6 +49,23 @@ public class UserController {
                 User ami = userService.getUserById(Integer.parseInt(ami_id));
 		if(userService.ajouterAmi(userSession, ami))
 			mv.addObject("resultat","Demande d'amitié ajoutée avec succès");
+		else
+			mv.addObject("resultat", "Erreur");
+		
+	  	return mv; 
+	  }
+        
+        @RequestMapping(value="/confirmer_ami.htm", method=RequestMethod.GET)
+	  protected ModelAndView confirmerProcess( HttpServletRequest
+	  request, HttpServletResponse response) throws Exception { 
+		ModelAndView mv = new ModelAndView("resultat"); 
+		String ami_id = request.getParameter("ami_id");
+		HttpSession session=request.getSession(false); 
+		User userSession = (User) session.getAttribute("user");
+		mv.addObject("titre","Résultat de l'ajout d'un ami");
+                User ami = userService.getUserById(Integer.parseInt(ami_id));
+		if(userService.confirmerAmi(userSession, ami))
+			mv.addObject("resultat","Demande d'amitié confirmée avec succès");
 		else
 			mv.addObject("resultat", "Erreur");
 		
