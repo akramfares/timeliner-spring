@@ -1,11 +1,14 @@
- </div>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+</div>
 
 
     <!-- Nav Sidebar -->
     <!-- This is source ordered to be pulled to the left on larger screens -->
     <div class="three columns pull-six">
       <div class="panel">
-        <a href="#"><img src="http://placehold.it/300x240&text=[img]" /></a>
+          <a href="/SpringTimeliner/photoprofile.htm">
+              <c:import url="/image.htm?w=300&h=240&user=${userConnecte.id}"></c:import>
+          </a>
         <h5><a href="#">${userConnecte.nom} ${userConnecte.prenom}</a></h5>
 
         <dl class="vertical tabs">

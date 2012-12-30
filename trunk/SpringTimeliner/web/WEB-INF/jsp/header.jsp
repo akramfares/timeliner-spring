@@ -20,12 +20,12 @@
                            <c:choose>
                                     <c:when test="${connecte}">
                                         <ul class="nav cf">
-                                            <li><a href="/SpringTimeliner">Accueil</a></li>
+                                            <li><a href="/SpringTimeliner/mur.htm">Accueil</a></li>
                                             <li><a href="/SpringTimeliner/membres.htm" class="new" attr-new="1">Amis</a></li>
                                             <li><a href="#" class="new" attr-new="4">Messages</a></li>
                                             <li><a href="#" class="new" attr-new="3">Notifications</a></li>
                                             <li><a href="/SpringTimeliner/mur.htm">Mon profile</a></li>
-                                            <li><a href="#">Déconnexion</a></li>
+                                            <li><a href="/SpringTimeliner">Déconnexion</a></li>
                                           </ul>
                                     </c:when>
 

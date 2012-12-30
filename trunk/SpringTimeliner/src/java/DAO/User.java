@@ -29,6 +29,7 @@ public class User implements Serializable {
         private Date datenaissance;
         private Boolean sexe;
         private String adresse;
+        private Boolean photoprofile;
         
         @OneToMany
 	private List<Status> statusEnvoye = new ArrayList<Status>();
@@ -40,6 +41,16 @@ public class User implements Serializable {
         @OneToMany
 	private List<Ami> amisRecus = new ArrayList<Ami>();
 
+    public Boolean getPhotoprofile() {
+        return photoprofile;
+    }
+
+    public void setPhotoprofile(Boolean photoprofile) {
+        this.photoprofile = photoprofile;
+    }
+
+        
+     
     public List<Ami> getAmisEnvoyes() {
         return amisEnvoyes;
     }

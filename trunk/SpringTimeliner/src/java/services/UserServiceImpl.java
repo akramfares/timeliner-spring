@@ -93,5 +93,11 @@ public class UserServiceImpl implements UserService{
         else return false;
     }
 
+    @Override
+    public void modifierPhoto(User userSession) {
+        userSession.setPhotoprofile(Boolean.TRUE);
+        users.update(userSession);
+    }
+
 	
 }

@@ -52,6 +52,23 @@ public class HomeController {
                 mv.addObject("userConnecte",userSession);
                 return mv;
         }
+        
+         @RequestMapping(value="/image.htm",method=RequestMethod.GET)
+	protected ModelAndView imageProcess( HttpServletRequest
+	  request, HttpServletResponse response) throws Exception { 
+            HttpSession session=request.getSession(false); 
+	    User userSession = (User) session.getAttribute("user");
+            ModelAndView mv = new ModelAndView("image"); 
+            String w = request.getParameter("w");    
+            String h = request.getParameter("h");
+            String user_id = request.getParameter("user");
+            User user = userService.getUserById(Integer.parseInt(user_id));
+                mv.addObject("w",w);
+                mv.addObject("h",h);
+                mv.addObject("user",user);
+                return mv;
+        }
+
 
 	@RequestMapping(value="/inscription.htm", method=RequestMethod.POST)
 	  protected ModelAndView inscriptionProcess( HttpServletRequest

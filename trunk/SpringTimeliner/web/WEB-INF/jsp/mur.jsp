@@ -10,7 +10,9 @@
                             <c:forEach items="${list_status}" var="current">
                                <!-- Feed Entry -->
                                 <div class="row">
-                                  <div class="two columns mobile-one"><img src="http://placehold.it/80x80&text=[img]" /></div>
+                                  <div class="two columns mobile-one">
+                                      <c:import url="/image.htm?w=80&h=80&user=${current.proprio.id}"></c:import>
+                                  </div>
                                   <div class="ten columns">
                                     <p><strong>${current.proprio.nom} ${current.proprio.prenom} said :</strong> ${current.contenu}</p>
                                     <ul class="inline-list">
