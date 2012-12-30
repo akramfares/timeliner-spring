@@ -24,5 +24,6 @@ public interface UserService {
         public List<User> getDemandesAmi(User userSession);
         public List<User> getAmis(User userSession);
         public boolean confirmerAmi(User userSession, User ami);
+        public void modifierPhoto(User userSession);
         
 }

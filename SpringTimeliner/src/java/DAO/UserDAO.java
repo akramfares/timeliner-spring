@@ -23,7 +23,7 @@ public class UserDAO {
 	
 	@Transactional
 	public void save(User i){
-		//em.merge(i);
+		i.setPhotoprofile(Boolean.FALSE);
 		em.persist(i);
 	}
 	
