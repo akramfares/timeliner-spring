@@ -4,12 +4,18 @@
 
     <!-- Nav Sidebar -->
     <!-- This is source ordered to be pulled to the left on larger screens -->
-    <div class="three columns pull-six">
+    <div class="three columns pull-six" style="right:70%">
       <div class="panel">
-          <a href="/SpringTimeliner/photoprofile.htm">
-              <c:import url="/image.htm?w=300&h=240&user=${userConnecte.id}"></c:import>
-          </a>
-        <h5><a href="#">${userConnecte.nom} ${userConnecte.prenom}</a></h5>
+          <c:choose>
+                <c:when test="${connecte}">
+                    <a href="/SpringTimeliner/photoprofile.htm">
+                        <c:import url="/image.htm?w=300&h=240&user=${userConnecte.id}"></c:import>
+                    </a>
+                  <h5><a href="#">${userConnecte.nom} ${userConnecte.prenom}</a></h5>
+                </c:when>
+                <c:otherwise></c:otherwise>
+            </c:choose>
+          
 
         <dl class="vertical tabs">
           <dd><a href="#">Section 1</a></dd>
@@ -25,13 +31,7 @@
 
 
     <!-- Right Sidebar -->
-    <!-- On small devices this column is hidden -->
-    <aside class="three columns hide-for-small">
-      <p><img src="http://placehold.it/300x440&text=[ad]" /></p>
-      <p><img src="http://placehold.it/300x440&text=[ad]" /></p>
-    </aside>
 
-  </div>
 
 
   <!-- Footer -->

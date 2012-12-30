@@ -27,7 +27,7 @@
                   <c:import url="/image.htm?w=80&h=80&user=${current.id}"></c:import>
               </div>
               <div class="ten columns">
-                  <p><strong>${current.nom} ${current.prenom}</strong></p>
+                  <p><strong><a href="/SpringTimeliner/profile.htm?user=${current.id}">${current.nom} ${current.prenom}</a></strong></p>
                 <ul class="inline-list">
                 </ul>
               </div>
