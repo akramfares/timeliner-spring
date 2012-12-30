@@ -39,6 +39,7 @@ public class HomeController {
 	    User userSession = (User) session.getAttribute("user");
             ModelAndView mv = new ModelAndView("header"); 
                 mv.addObject("connecte",isConnecte(userSession));
+                mv.addObject("userConnecte",userSession);
                 return mv;
         }
         

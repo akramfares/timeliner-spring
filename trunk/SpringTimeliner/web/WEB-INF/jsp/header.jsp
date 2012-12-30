@@ -24,7 +24,7 @@
                                             <li><a href="/SpringTimeliner/membres.htm" class="new" attr-new="1">Amis</a></li>
                                             <li><a href="#" class="new" attr-new="4">Messages</a></li>
                                             <li><a href="#" class="new" attr-new="3">Notifications</a></li>
-                                            <li><a href="/SpringTimeliner/mur.htm">Mon profile</a></li>
+                                            <li><a href="/SpringTimeliner/profile.htm?user=${userConnecte.id}">Mon profile</a></li>
                                             <li><a href="/SpringTimeliner">Déconnexion</a></li>
                                           </ul>
                                     </c:when>
@@ -47,4 +47,4 @@
 
                       <!-- Main Feed -->
                       <!-- This has been source ordered to come first in the markup (and on small devices) but to be to the right of the nav on larger screens -->
-                      <div class="six columns push-three">
+                      <div class="six columns push-three" style="width:70%">

@@ -35,6 +35,22 @@ public class StatusServiceImpl implements StatusService{
 			return true;
 		}
     }
+    
+    @Override
+    public boolean ajouterProfile(String contenu, User proprio, User destinataire) {
+        if(contenu.isEmpty() || proprio == null){
+                        return false;   
+        }
+		else {
+                        Status s = new Status();
+                        s.setContenu(contenu);
+                        s.setDestinataire(destinataire);
+                        s.setProprio(proprio);
+                        s.setPiecejointe(contenu);
+			status.addStatus(s);
+			return true;
+		}
+    }
 
     @Override
     public ArrayList<Status> getMur(User proprio) {
