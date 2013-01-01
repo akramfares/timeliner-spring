@@ -21,7 +21,7 @@ public class StatusServiceImpl implements StatusService{
     public StatusDAO status;
     
     @Override
-    public boolean ajouter(String contenu, User proprio) {
+    public boolean ajouter(String contenu,String piecejointe, User proprio) {
         if(contenu.isEmpty() || proprio == null){
                         return false;   
         }
@@ -30,14 +30,14 @@ public class StatusServiceImpl implements StatusService{
                         s.setContenu(contenu);
                         s.setDestinataire(proprio);
                         s.setProprio(proprio);
-                        s.setPiecejointe(contenu);
+                        s.setPiecejointe(piecejointe);
 			status.addStatus(s);
 			return true;
 		}
     }
     
     @Override
-    public boolean ajouterProfile(String contenu, User proprio, User destinataire) {
+    public boolean ajouterProfile(String contenu,String piecejointe, User proprio, User destinataire) {
         if(contenu.isEmpty() || proprio == null){
                         return false;   
         }
@@ -46,7 +46,7 @@ public class StatusServiceImpl implements StatusService{
                         s.setContenu(contenu);
                         s.setDestinataire(destinataire);
                         s.setProprio(proprio);
-                        s.setPiecejointe(contenu);
+                        s.setPiecejointe(piecejointe);
 			status.addStatus(s);
 			return true;
 		}

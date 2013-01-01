@@ -15,8 +15,8 @@ import java.util.ArrayList;
  */
 public interface StatusService {
 	
-	public boolean ajouter(String contenu, User Proprio);
-        public boolean ajouterProfile(String contenu, User proprio, User destinataire);
+	public boolean ajouter(String contenu,String piecejointe, User proprio);
+        public boolean ajouterProfile(String contenu,String piecejointe, User proprio, User destinataire);
         public ArrayList<Status> getMur(User proprio);
 	
 }
