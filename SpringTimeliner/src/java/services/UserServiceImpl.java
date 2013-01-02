@@ -6,6 +6,8 @@ package services;
 
 import DAO.Ami;
 import DAO.AmiDAO;
+import DAO.Notification;
+import DAO.NotificationDAO;
 import DAO.User;
 import DAO.UserDAO;
 import java.util.Date;
@@ -23,6 +25,8 @@ public class UserServiceImpl implements UserService{
 	public UserDAO users;
 	@Autowired
 	public AmiDAO amiDAO;
+        @Autowired
+        public NotificationDAO notification;
 
 	@Override
 	public boolean inscription(String nom, String prenom, String sexe, String adresse,String login, String motdepasse) {
@@ -69,6 +73,13 @@ public class UserServiceImpl implements UserService{
             a.setDestinataire(ami);
             a.setEtat(false);
             amiDAO.addAmi(a);
+            
+            // Ajouter une notification au destinataire
+            Notification n = new Notification();
+            n.setEtat(Boolean.FALSE);
+            n.setProprio(ami);
+            n.setContenu("<a href='profile.htm?user="+userSession.getId()+"'>"+userSession.getNom()+" "+userSession.getPrenom()+"</a> vous demande en ami.");
+            notification.addNotification(n);
             return true;
         }
         else return false;
