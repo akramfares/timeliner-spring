@@ -43,8 +43,8 @@ public class HomeController {
             ModelAndView mv = new ModelAndView("header"); 
                 mv.addObject("connecte",isConnecte(userSession));
                 mv.addObject("userConnecte",userSession);
-                mv.addObject("count_notifications",notificationService.countByProprio(userSession));
-                mv.addObject("count_amis",userService.countDemandesAmi(userSession));
+                //mv.addObject("count_notifications",notificationService.countByProprio(userSession));
+                //mv.addObject("count_amis",userService.countDemandesAmi(userSession));
                 return mv;
         }
         
@@ -114,6 +114,18 @@ public class HomeController {
 		
 	  	return mv; 
 	  }	
+        
+        @RequestMapping(value="/deconnexion.htm", method=RequestMethod.GET)
+	  protected ModelAndView deconnexionProcess( HttpServletRequest
+	  request, HttpServletResponse response) throws Exception { 
+		ModelAndView mv = new ModelAndView("resultat"); 
+		mv.addObject("titre","Résultat de la deconnexion");
+                HttpSession session=request.getSession(false); 
+                session.setAttribute("user",null);
+		mv.addObject("resultat","Deconnexion réussie ");
+
+	  	return mv; 
+	  }
         
         private boolean isConnecte(User userSession){
             if(userSession == null) return false;
