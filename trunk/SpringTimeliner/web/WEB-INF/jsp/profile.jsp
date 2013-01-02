@@ -15,9 +15,10 @@
                             </div>
                             <!-- End Feed Entry -->
                             <br>
-			<form method='post' action='/SpringTimeliner/ajouter_status_profile.htm?user=${user.id}' name='formulaire'>
+			<form method='post' action='/SpringTimeliner/ajouter_status_profile.htm?user=${user.id}' name='formulaire'  enctype="multipart/form-data">
 				
                                     <p>Exprimez-vous :<textarea name='contenu'></textarea></p>
+                                    <p>Pièce jointe : <input type='file' name='piece'/></p>
                                 <input type='submit' value='Envoyer'/>
                         </form>	
                         

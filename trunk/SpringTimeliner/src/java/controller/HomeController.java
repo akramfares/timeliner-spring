@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import services.NotificationService;
 import services.UserService;
 
 /**
@@ -23,7 +24,9 @@ import services.UserService;
 @Controller
 public class HomeController {
 	@Autowired
-	private UserService userService;	
+	private UserService userService;
+        @Autowired
+	private NotificationService notificationService;
 	
 	@RequestMapping(value="/index.htm",method=RequestMethod.GET)
 	protected ModelAndView indexProcess( HttpServletRequest
@@ -40,6 +43,8 @@ public class HomeController {
             ModelAndView mv = new ModelAndView("header"); 
                 mv.addObject("connecte",isConnecte(userSession));
                 mv.addObject("userConnecte",userSession);
+                mv.addObject("count_notifications",notificationService.countByProprio(userSession));
+                mv.addObject("count_amis",userService.countDemandesAmi(userSession));
                 return mv;
         }
         

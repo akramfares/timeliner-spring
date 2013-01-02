@@ -5,6 +5,7 @@
 package DAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -27,7 +28,7 @@ public class StatusDAO {
     }
 
     public ArrayList<Status> getAllByProprio(User proprio) {
-        Query q = em.createQuery("SELECT p FROM Status p WHERE p.proprio=? OR p.destinataire=?");
+        Query q = em.createQuery("SELECT p FROM Status p WHERE p.proprio=? OR p.destinataire=? ORDER BY p.dateheure");
 		q.setParameter(1, proprio);
                 q.setParameter(2, proprio);
 		return (ArrayList) q.getResultList();

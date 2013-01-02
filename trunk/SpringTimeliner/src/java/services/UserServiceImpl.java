@@ -99,5 +99,10 @@ public class UserServiceImpl implements UserService{
         users.update(userSession);
     }
 
+    @Override
+    public Integer countDemandesAmi(User userSession) {
+        return amiDAO.getDemandesAmi(userSession).size();
+    }
+
 	
 }
