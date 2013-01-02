@@ -5,6 +5,7 @@
     <class>DAO.User</class>
     <class>DAO.Status</class>
     <class>DAO.Ami</class>
+    <class>DAO.Notification</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.connection.username" value="username"/>

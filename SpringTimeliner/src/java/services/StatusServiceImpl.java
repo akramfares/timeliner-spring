@@ -4,10 +4,13 @@
  */
 package services;
 
+import DAO.Notification;
+import DAO.NotificationDAO;
 import DAO.Status;
 import DAO.StatusDAO;
 import DAO.User;
 import java.util.ArrayList;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +22,8 @@ import org.springframework.stereotype.Service;
 public class StatusServiceImpl implements StatusService{
     @Autowired
     public StatusDAO status;
+    @Autowired
+    public NotificationDAO notification;
     
     @Override
     public boolean ajouter(String contenu,String piecejointe, User proprio) {
@@ -31,6 +36,7 @@ public class StatusServiceImpl implements StatusService{
                         s.setDestinataire(proprio);
                         s.setProprio(proprio);
                         s.setPiecejointe(piecejointe);
+                        s.setDateheure(new Date());
 			status.addStatus(s);
 			return true;
 		}
@@ -47,7 +53,16 @@ public class StatusServiceImpl implements StatusService{
                         s.setDestinataire(destinataire);
                         s.setProprio(proprio);
                         s.setPiecejointe(piecejointe);
+                        s.setDateheure(new Date());
 			status.addStatus(s);
+                        
+                        // Ajouter une notification au destinataire
+                        Notification n = new Notification();
+                        n.setContenu(contenu);
+                        n.setEtat(Boolean.FALSE);
+                        n.setProprio(destinataire);
+                        n.setContenu("<a href='profile.htm?user="+proprio.getId()+"'>"+proprio.getNom()+" "+proprio.getPrenom()+"</a> a posté un commentaire sur votre mur");
+                        notification.addNotification(n);
 			return true;
 		}
     }

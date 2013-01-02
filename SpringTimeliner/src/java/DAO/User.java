@@ -40,7 +40,18 @@ public class User implements Serializable {
 	private List<Ami> amisEnvoyes = new ArrayList<Ami>();
         @OneToMany
 	private List<Ami> amisRecus = new ArrayList<Ami>();
+        
+        @OneToMany
+	private List<Notification> notifications = new ArrayList<Notification>();
 
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
+    }
+    
     public Boolean getPhotoprofile() {
         return photoprofile;
     }

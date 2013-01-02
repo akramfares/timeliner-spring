@@ -19,29 +19,19 @@ import javax.persistence.Temporal;
  * @author Fares
  */
 @Entity
-public class Status implements Serializable {
+public class Notification implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
     @ManyToOne
     private User proprio;
-    @ManyToOne
-    private User destinataire;
     @Column
     private String contenu;
     @Column
-    private String piecejointe;
+    private Boolean etat;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateheure;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Date getDateheure() {
         return dateheure;
@@ -51,18 +41,6 @@ public class Status implements Serializable {
         this.dateheure = dateheure;
     }
     
-    
-
-    public User getDestinataire() {
-        return destinataire;
-    }
-
-    public void setDestinataire(User destinataire) {
-        this.destinataire = destinataire;
-    }
-    
-    
-
     public User getProprio() {
         return proprio;
     }
@@ -70,7 +48,6 @@ public class Status implements Serializable {
     public void setProprio(User proprio) {
         this.proprio = proprio;
     }
-
 
     public String getContenu() {
         return contenu;
@@ -80,15 +57,23 @@ public class Status implements Serializable {
         this.contenu = contenu;
     }
 
-    public String getPiecejointe() {
-        return piecejointe;
+    public Boolean getEtat() {
+        return etat;
     }
 
-    public void setPiecejointe(String piecejointe) {
-        this.piecejointe = piecejointe;
+    public void setEtat(Boolean etat) {
+        this.etat = etat;
     }
+
     
     
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     @Override
     public int hashCode() {
@@ -100,10 +85,10 @@ public class Status implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Status)) {
+        if (!(object instanceof Notification)) {
             return false;
         }
-        Status other = (Status) object;
+        Notification other = (Notification) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -112,7 +97,7 @@ public class Status implements Serializable {
 
     @Override
     public String toString() {
-        return "DAO.Status[ id=" + id + " ]";
+        return "DAO.Notification[ id=" + id + " ]";
     }
     
 }
