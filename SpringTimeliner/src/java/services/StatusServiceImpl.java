@@ -9,8 +9,11 @@ import DAO.NotificationDAO;
 import DAO.Status;
 import DAO.StatusDAO;
 import DAO.User;
+import DAO.UserDAO;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +27,8 @@ public class StatusServiceImpl implements StatusService{
     public StatusDAO status;
     @Autowired
     public NotificationDAO notification;
+    @Autowired
+    public UserDAO user;
     
     @Override
     public boolean ajouter(String contenu,String piecejointe, User proprio) {
@@ -38,6 +43,20 @@ public class StatusServiceImpl implements StatusService{
                         s.setPiecejointe(piecejointe);
                         s.setDateheure(new Date());
 			status.addStatus(s);
+                        List<User> l= user.findAll();
+                        Iterator it= l.iterator();
+                        while(it.hasNext()){
+                            User u=(User) it.next();
+                            if(contenu.contains("@"+u.getNom()+" "+u.getPrenom()))
+                            {
+                                 Notification n = new Notification();
+                                 n.setContenu(contenu);
+                                 n.setEtat(Boolean.FALSE);
+                                 n.setProprio(u);
+                                 n.setContenu("<a href='profile.htm?user="+proprio.getId()+"'>"+proprio.getNom()+" "+proprio.getPrenom()+"</a> vous a cité dans un statut");
+                                 notification.addNotification(n);
+                            }
+                        }
 			return true;
 		}
     }
