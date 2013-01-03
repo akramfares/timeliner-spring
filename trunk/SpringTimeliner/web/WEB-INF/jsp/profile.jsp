@@ -22,6 +22,8 @@
                                 <input type='submit' value='Envoyer'/>
                         </form>	
                         
+                           <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+                            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
                             <c:forEach items="${list_status}" var="current">
                                <!-- Feed Entry -->
                                 <div class="row">
@@ -29,17 +31,50 @@
                                       <c:import url="/image.htm?w=80&h=80&user=${current.proprio.id}"></c:import>
                                   </div>
                                   <div class="ten columns">
-                                    <p><strong>${current.proprio.nom} ${current.proprio.prenom} said :</strong> ${current.contenu}</p>
+                                    <p><strong>${current.proprio.nom} ${current.proprio.prenom} said :</strong> 
+                                        <c:choose>
+                                            <c:when test="${not empty current.piecejointe}">
+                                            <p><img src="/SpringTimeliner/uploads/status/${current.piecejointe}" width="300"/></p>
+                                            </c:when>
+
+                                            <c:otherwise>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        ${current.contenu}
+                                    </p>
                                     <ul class="inline-list">
-                                      <li><a href="">Reply</a></li>
-                                      <li><a href="">Share</a></li>
+                                      <!-- J'aime & Commentaires-->
+                                      <script type='text/javascript'>
+                                          var data${current.id} = new Firebase('https://timeliner.firebaseio.com/id/${current.id}');
+                                          var n${current.id};
+                                          // Ne pas faire attention aux erreurs
+                                          data${current.id}.on('value', function(snapshot) {
+
+                                            if(snapshot.val()) {
+                                               $('#status_${current.id}').text(snapshot.val().nbr);
+                                               n${current.id} = snapshot.val().nbr;
+                                            }
+                                            else{
+                                                $('#status_${current.id}').text('0');
+                                               n${current.id} = 0;
+                                            }
+                                                
+                                          });
+                                          
+                                          function jaime${current.id}(){
+                                              $('#status_${current.id}').text(n${current.id}++);
+                                              data${current.id}.set({nbr : n${current.id}++});
+                                          }
+                                      </script>
+                                      <li><a href="javascript:jaime${current.id}();">[<span id="status_${current.id}"></span>] J'aime</a></li>
+                                      <!-- End J'aime & Commentaires-->
                                     </ul>
                                   </div>
                                 </div>
                                 <!-- End Feed Entry -->
 
                                 <hr />
-                            </c:forEach>                          
+                            </c:forEach>                               
 			</div>
 		
  <c:import url="/footer.htm"></c:import>
