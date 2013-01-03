@@ -43,6 +43,8 @@ public class StatusServiceImpl implements StatusService{
                         s.setPiecejointe(piecejointe);
                         s.setDateheure(new Date());
 			status.addStatus(s);
+                        
+                        //ajouter une notification si un user est identifié
                         List<User> l= user.findAll();
                         Iterator it= l.iterator();
                         while(it.hasNext()){
@@ -75,13 +77,31 @@ public class StatusServiceImpl implements StatusService{
                         s.setDateheure(new Date());
 			status.addStatus(s);
                         
-                        // Ajouter une notification au destinataire
-                        Notification n = new Notification();
-                        n.setContenu(contenu);
-                        n.setEtat(Boolean.FALSE);
-                        n.setProprio(destinataire);
-                        n.setContenu("<a href='profile.htm?user="+proprio.getId()+"'>"+proprio.getNom()+" "+proprio.getPrenom()+"</a> a posté un commentaire sur votre mur");
-                        notification.addNotification(n);
+                        if(proprio.getId()!=destinataire.getId()){//on test si on ecrit pas dans son propre mur
+                            // Ajouter une notification au destinataire
+                            Notification n = new Notification();
+                            n.setContenu(contenu);
+                            n.setEtat(Boolean.FALSE);
+                            n.setProprio(destinataire);
+                            n.setContenu("<a href='profile.htm?user="+proprio.getId()+"'>"+proprio.getNom()+" "+proprio.getPrenom()+"</a> a posté un commentaire sur votre mur");
+                            notification.addNotification(n);
+
+                            //ajouter une notification si un user est identifié
+                            List<User> l= user.findAll();
+                            Iterator it= l.iterator();
+                            while(it.hasNext()){
+                                User u=(User) it.next();
+                                if(contenu.contains("@"+u.getNom()+" "+u.getPrenom()))
+                                {
+                                     Notification n2 = new Notification();
+                                     n2.setContenu(contenu);
+                                     n2.setEtat(Boolean.FALSE);
+                                     n2.setProprio(u);
+                                     n2.setContenu("<a href='profile.htm?user="+proprio.getId()+"'>"+proprio.getNom()+" "+proprio.getPrenom()+"</a> vous a cité dans un statut");
+                                     notification.addNotification(n2);
+                                }
+                            }
+                        }
 			return true;
 		}
     }
