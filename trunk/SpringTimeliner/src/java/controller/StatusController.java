@@ -42,6 +42,7 @@ public class StatusController {
             
 		ModelAndView mv = new ModelAndView("mur");
                 mv.addObject("connecte",isConnecte(request));
+                mv.addObject("userConnecte",userSession);
 		mv.addObject("titre","Ajouter une personne");
 		mv.addObject("action","ajouter_status");
                 mv.addObject("list_status",status.getMur(userSession));
@@ -51,12 +52,15 @@ public class StatusController {
         @RequestMapping(value="/profile.htm", method=RequestMethod.GET)
 	  protected ModelAndView profileProcess( HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
+                HttpSession session=request.getSession(false); 
+		User userSession = (User) session.getAttribute("user");
                 String user_id = request.getParameter("user");
                 User user = userService.getUserById(Integer.parseInt(user_id));
 		ModelAndView mv = new ModelAndView("profile");
 		mv.addObject("titre","Profile de "+user.getNom()+" "+user.getPrenom());
                 mv.addObject("list_status",status.getMur(user));
                  mv.addObject("user",user);
+                 mv.addObject("userConnecte",userSession);
 	  	return mv; 
 	  }
 	
