@@ -47,7 +47,7 @@ public class HomeController {
                 //mv.addObject("count_amis",userService.countDemandesAmi(userSession));
                 return mv;
         }
-        
+               
         @RequestMapping(value="/footer.htm",method=RequestMethod.GET)
 	protected ModelAndView footerProcess( HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
@@ -107,6 +107,7 @@ public class HomeController {
 			HttpSession session=request.getSession(false); // pas de création !
 			User u = userService.getUserDAO().findByName(login);
 			session.setAttribute("user",u);
+                        mv.addObject("connecte",true);
 			mv.addObject("resultat","Connexion réussie "+u.getLogin());
 		}
 		else
