@@ -1,0 +1,27 @@
+
+body{
+    
+    text-align: center
+}
+
+ p{
+    padding: 30px;
+    text-align: center;
+    font-weight: bold;
+    background: white;
+    color: black;
+}
+
+ a{
+    text-decoration: none;
+    background-color: gray;
+    padding: 10px;
+    border: solid 2px black;
+    color: white;
+    border-radius: 25px;
+}
+
+a:hover{
+    background-color: lightgrey;
+    color:black;
+}
