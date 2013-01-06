@@ -28,7 +28,7 @@ public class AmiDAO {
     
     @Transactional
     public List<User> getDemandesAmi(User u) {
-        Query q = em.createQuery("SELECT DISTINCT a.proprio FROM Ami a, User u WHERE a.destinataire = ? AND etat = false");
+        Query q = em.createQuery("SELECT DISTINCT a.proprio FROM Ami a, User u WHERE a.destinataire = ? AND etat = 0");
         q.setParameter(1, u);
 	return (ArrayList) q.getResultList();
     }
