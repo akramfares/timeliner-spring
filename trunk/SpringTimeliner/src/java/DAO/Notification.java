@@ -24,14 +24,12 @@ public class Notification implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private User proprio;
-    @Column
     private String contenu;
-    @Column
     private Boolean etat;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateheure;
+    @ManyToOne
+    private User proprio;
 
     public Date getDateheure() {
         return dateheure;

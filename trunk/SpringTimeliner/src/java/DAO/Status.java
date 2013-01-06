@@ -24,16 +24,14 @@ public class Status implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String contenu;
+    private String piecejointe;
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dateheure;
     @ManyToOne
     private User proprio;
     @ManyToOne
     private User destinataire;
-    @Column
-    private String contenu;
-    @Column
-    private String piecejointe;
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date dateheure;
 
     public Integer getId() {
         return id;
