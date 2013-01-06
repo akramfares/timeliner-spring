@@ -25,12 +25,16 @@ public class NotificationController {
     @Autowired
     private NotificationService notificationService;
     
+    // Liste de toutes les notifications de l'utilisateur connecté
     @RequestMapping(value="/notifications.htm",method=RequestMethod.GET)
     protected ModelAndView indexProcess( HttpServletRequest
       request, HttpServletResponse response) throws Exception { 
+        // Récupération de l'utilisateur connecté
         HttpSession session=request.getSession(false); 
 	User userSession = (User) session.getAttribute("user");
+        
         ModelAndView mv = new ModelAndView("notifications"); 
+        // Envoi de la liste de notifications à la JSP
         mv.addObject("notifications",notificationService.getAll(userSession));
         return mv;
     }
