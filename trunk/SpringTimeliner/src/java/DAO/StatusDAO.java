@@ -28,7 +28,7 @@ public class StatusDAO {
     }
 
     public ArrayList<Status> getAllByProprio(User proprio) {
-        Query q = em.createQuery("SELECT p FROM Status p WHERE p.proprio=? OR p.destinataire=? ORDER BY p.dateheure");
+        Query q = em.createQuery("SELECT p FROM Status p WHERE p.proprio=? OR p.destinataire=? ORDER BY p.dateheure DESC");
 		q.setParameter(1, proprio);
                 q.setParameter(2, proprio);
 		return (ArrayList) q.getResultList();

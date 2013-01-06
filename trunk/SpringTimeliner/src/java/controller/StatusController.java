@@ -30,55 +30,68 @@ import services.UserService;
 @Controller
 public class StatusController {
 	@Autowired
-	private StatusService status;
+	private StatusService statusService;
         @Autowired
         private UserService userService;
 	
+        // Mur de l'utilisateur
 	@RequestMapping(value="/mur.htm", method=RequestMethod.GET)
 	  protected ModelAndView murProcess( HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
-                HttpSession session=request.getSession(false); 
-		User userSession = (User) session.getAttribute("user");
-            
-		ModelAndView mv = new ModelAndView("mur");
+            // Récupération de l'utilisateur connecté
+            HttpSession session=request.getSession(false); 
+            User userSession = (User) session.getAttribute("user");
+
+            ModelAndView mv = new ModelAndView("mur");
                 mv.addObject("connecte",isConnecte(request));
                 mv.addObject("userConnecte",userSession);
 		mv.addObject("titre","Ajouter une personne");
-		mv.addObject("action","ajouter_status");
-                mv.addObject("list_status",status.getMur(userSession));
-	  	return mv; 
+                // Récupération des statuts de l'utilisateur connecté
+                mv.addObject("list_status",statusService.getMur(userSession));
+            return mv; 
 	  }
         
+        // Profile d'un utilisateur
         @RequestMapping(value="/profile.htm", method=RequestMethod.GET)
 	  protected ModelAndView profileProcess( HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
-                HttpSession session=request.getSession(false); 
-		User userSession = (User) session.getAttribute("user");
-                String user_id = request.getParameter("user");
-                User user = userService.getUserById(Integer.parseInt(user_id));
-		ModelAndView mv = new ModelAndView("profile");
+            // Récupération de l'utilisateur connecté
+            HttpSession session=request.getSession(false); 
+            User userSession = (User) session.getAttribute("user");
+            
+            // Récupération de l'utilisateur à partir de son Id
+            String user_id = request.getParameter("user");
+            User user = userService.getUserById(Integer.parseInt(user_id));
+            
+            ModelAndView mv = new ModelAndView("profile");
 		mv.addObject("titre","Profile de "+user.getNom()+" "+user.getPrenom());
-                mv.addObject("list_status",status.getMur(user));
-                 mv.addObject("user",user);
-                 mv.addObject("userConnecte",userSession);
-	  	return mv; 
+                // Récupération des statuts de l'utilisateur
+                mv.addObject("list_status",statusService.getMur(user));
+                mv.addObject("user",user);
+                mv.addObject("userConnecte",userSession);
+            return mv; 
 	  }
 	
+        // Validation de l'ajout d'un status
 	@RequestMapping(value="/ajouter_status.htm", method=RequestMethod.POST)
 	  protected ModelAndView ajouterProcess(@RequestParam("piece") MultipartFile file, HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
-                String piecejointe = null;
-                ModelAndView mv = new ModelAndView("resultat"); 
+            // Récupération de l'utilisateur connecté
+            HttpSession session=request.getSession(false); 
+            User userSession = (User) session.getAttribute("user");
+            
+            String piecejointe = null;
+            ModelAndView mv = new ModelAndView("resultat"); 
+            String contenu = request.getParameter("contenu");    
                 mv.addObject("connecte",isConnecte(request));
-		String contenu = request.getParameter("contenu");
-		HttpSession session=request.getSession(false); 
-		User userSession = (User) session.getAttribute("user");
 		mv.addObject("titre","Résultat de l'ajout du status");
                 
-                if(file.getSize() != 0){
+                // Vérification de la taille de la piece jointe et de son type
+                if(file.getSize() != 0 && (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png"))){
                     InputStream inputStream = null;
                      OutputStream outputStream = null;
                     inputStream = file.getInputStream();
+                    // Enregistrement de l'image sur le disk
                     String fileName = request.getServletContext().getRealPath(File.separator) + "/uploads/status/" + file.getOriginalFilename();
                     outputStream = new FileOutputStream(fileName);
                     int readBytes = 0;
@@ -90,8 +103,8 @@ public class StatusController {
                     inputStream.close();
                     piecejointe = file.getOriginalFilename();
                 }
-                
-		if(status.ajouter(contenu,piecejointe,userSession))
+                // Vérification de l'ajout du status
+		if(statusService.ajouter(contenu,piecejointe,userSession))
 			mv.addObject("resultat","Status ajouté avec succès");
 		else
 			mv.addObject("resultat", "Erreur dans le formulaire");
@@ -99,23 +112,28 @@ public class StatusController {
 	  	return mv; 
 	  }
         
+        // Validation de l'ajout d'un status sur un profile d'utilisateur
         @RequestMapping(value="/ajouter_status_profile.htm", method=RequestMethod.POST)
 	  protected ModelAndView ajouterProfileProcess(@RequestParam("piece") MultipartFile file, HttpServletRequest
 	  request, HttpServletResponse response) throws Exception { 
-                String piecejointe = null;
-		ModelAndView mv = new ModelAndView("resultat"); 
-                mv.addObject("connecte",isConnecte(request));
-		String contenu = request.getParameter("contenu");
-		HttpSession session=request.getSession(false); 
-		User userSession = (User) session.getAttribute("user");
-                String user_id = request.getParameter("user");
-                User user = userService.getUserById(Integer.parseInt(user_id));
+            HttpSession session=request.getSession(false); 
+            User userSession = (User) session.getAttribute("user");    
+            String piecejointe = null;
+            ModelAndView mv = new ModelAndView("resultat"); 
+            String contenu = request.getParameter("contenu");
+            // Récupération de l'utilisateur à partir de son Id 
+            String user_id = request.getParameter("user");
+            User user = userService.getUserById(Integer.parseInt(user_id));
+            
 		mv.addObject("titre","Résultat de l'ajout du status");
+                mv.addObject("connecte",isConnecte(request));
                 
-                if(file.getSize() != 0){
+                // Vérification de la taille de la piece jointe et de son type
+                if(file.getSize() != 0 && (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png"))){
                     InputStream inputStream = null;
                      OutputStream outputStream = null;
                     inputStream = file.getInputStream();
+                    // Enregistrement de l'image sur le disk
                     String fileName = request.getServletContext().getRealPath(File.separator) + "/uploads/status/" + file.getOriginalFilename();
                     outputStream = new FileOutputStream(fileName);
                     int readBytes = 0;
@@ -128,7 +146,8 @@ public class StatusController {
                     piecejointe = file.getOriginalFilename();
                 }
                 
-		if(status.ajouterProfile(contenu,piecejointe, userSession, user))
+                // Vérification de l'ajout du status
+		if(statusService.ajouterProfile(contenu,piecejointe, userSession, user))
 			mv.addObject("resultat","Status ajouté avec succès");
 		else
 			mv.addObject("resultat", "Erreur dans le formulaire");
@@ -136,6 +155,7 @@ public class StatusController {
 	  	return mv; 
 	  }
         
+        // Fonction qui retourne si l'utilisateur est connecté ou pas
         private boolean isConnecte(HttpServletRequest request){
             HttpSession session=request.getSession(false); 
 	    User userSession = (User) session.getAttribute("user");
