@@ -48,8 +48,10 @@ public class HomeController {
             ModelAndView mv = new ModelAndView("header"); 
                 mv.addObject("connecte",isConnecte(userSession));
                 mv.addObject("userConnecte",userSession);
-                //mv.addObject("count_notifications",notificationService.countByProprio(userSession));
-                //mv.addObject("count_amis",userService.countDemandesAmi(userSession));
+                if(isConnecte(userSession)){
+                    mv.addObject("count_notifications",notificationService.countByProprio(userSession));
+                    mv.addObject("count_amis",userService.countDemandesAmi(userSession));
+                }
                 return mv;
         }
         

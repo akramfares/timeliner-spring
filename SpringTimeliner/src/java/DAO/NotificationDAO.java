@@ -39,7 +39,7 @@ public class NotificationDAO {
     }
 
     public Integer countAllByProprio(User proprio) {
-        Query q = em.createQuery("SELECT p FROM Notification p WHERE p.proprio=? AND p.etat=false ORDER BY p.dateheure");
+        Query q = em.createQuery("SELECT p FROM Notification p WHERE p.proprio=? AND p.etat=false");
         q.setParameter(1, proprio);
         return q.getResultList().size();
     }
