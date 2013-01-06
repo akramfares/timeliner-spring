@@ -30,17 +30,14 @@ public class User implements Serializable {
         private Boolean sexe;
         private String adresse;
         private Boolean photoprofile;
-        
         @OneToMany
 	private List<Status> statusEnvoye = new ArrayList<Status>();
         @OneToMany
 	private List<Status> statusRecus = new ArrayList<Status>();
-        
         @OneToMany
 	private List<Ami> amisEnvoyes = new ArrayList<Ami>();
         @OneToMany
 	private List<Ami> amisRecus = new ArrayList<Ami>();
-        
         @OneToMany
 	private List<Notification> notifications = new ArrayList<Notification>();
 

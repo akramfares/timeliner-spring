@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public boolean ajouterAmi(User userSession, User ami) {
         if(ami != null || userSession != null){
+            // Ajouter la demande d'ami
             Ami a = new Ami();
             a.setProprio(userSession);
             a.setDestinataire(ami);

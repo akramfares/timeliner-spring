@@ -14,8 +14,9 @@ import java.util.ArrayList;
  */
 public interface NotificationService {
 
+    // Retourne la liste des notifications d'un utilisateur donné
     public ArrayList<Notification> getAll(User userSession);
-
+    // Retourne le nombre de notifications non lues d'un utilisateur donné
     public Integer countByProprio(User userSession);
     
 }
